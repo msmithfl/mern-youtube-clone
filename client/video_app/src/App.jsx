@@ -2,7 +2,7 @@ import styled, { ThemeProvider } from "styled-components";
 import Menu from "./components/Menu";
 import Navbar from "./components/Navbar";
 import { darkTheme, lightTheme } from "./utils/Theme";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Video from "./pages/Video";
@@ -19,6 +19,7 @@ const Main = styled.div`
 const Wrapper = styled.div``;
 
 function App() {
+  //persist dark mode across refresh, explained at 34:30
   const [darkMode, setDarkMode] = useState(true);
 
   return (
