@@ -1,6 +1,8 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { format } from "timeago.js";
 
 const Container = styled.div`
   width: ${(props) => props.type !== "sm" && "360px"};
@@ -52,23 +54,32 @@ const Info = styled.div`
   color: ${({ theme }) => theme.textSoft};
 `;
 
-const Card = ({ type }) => {
+const Card = ({ type, video }) => {
+  const [channel, setChannel] = useState({});
+
+  useEffect(() => {
+    const fetchChannel = async () => {
+      const res = await axios.get(
+        `http://localhost:8800/api/users/find/${video.userId}`
+      );
+      //setting and displaying an error explained at 1:43:30
+      setChannel(res.data);
+    };
+    fetchChannel();
+  }, [video.userId]);
+
   return (
     <Link to="/video/test" style={{ textDecoration: "none" }}>
       <Container type={type}>
-        <Image
-          type={type}
-          src="https://marketplace.canva.com/EAE66-fThJI/1/0/1600w/canva-dark-movie-trailer-youtube-thumbnail-Y460nmpXiXM.jpg"
-        />
+        <Image type={type} src={video.imgUrl} />
         <Details type={type}>
-          <ChannelImage
-            type={type}
-            src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
-          />
+          <ChannelImage type={type} src={channel.img} />
           <Texts>
-            <Title>Test Video</Title>
-            <ChannelName>MattS</ChannelName>
-            <Info>667,423 views • 1 day ago</Info>
+            <Title>{video.title}</Title>
+            <ChannelName>{channel.name}</ChannelName>
+            <Info>
+              {video.views} views • {format(video.createdAt)}
+            </Info>
           </Texts>
         </Details>
       </Container>

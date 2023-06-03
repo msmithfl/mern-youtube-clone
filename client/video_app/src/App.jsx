@@ -36,7 +36,9 @@ function App() {
               <Routes>
                 {/* main route */}
                 <Route path="/">
-                  <Route index element={<Home />} />
+                  <Route index element={<Home type="random" />} />
+                  <Route path="trends" element={<Home type="trend" />} />
+                  <Route path="subscriptions" element={<Home type="sub" />} />
                   <Route path="signin" element={<SignIn />} />
                   {/* final path: url.com/video/2134123 */}
                   <Route path="video">

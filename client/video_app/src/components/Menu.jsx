@@ -95,18 +95,27 @@ const Menu = ({ darkMode, setDarkMode }) => {
             TestTube
           </Logo>
         </Link>
-        <Item>
-          <HomeIcon />
-          Home
-        </Item>
-        <Item>
-          <ExploreOutlinedIcon />
-          Explore
-        </Item>
-        <Item>
-          <SubscriptionsOutlinedIcon />
-          Subscriptions
-        </Item>
+        <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+          <Item>
+            <HomeIcon />
+            Home
+          </Item>
+        </Link>
+        <Link to="trends" style={{ textDecoration: "none", color: "inherit" }}>
+          <Item>
+            <ExploreOutlinedIcon />
+            Explore
+          </Item>
+        </Link>
+        <Link
+          to="subscriptions"
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          <Item>
+            <SubscriptionsOutlinedIcon />
+            Subscriptions
+          </Item>
+        </Link>
         <Hr />
         <Login>
           Sign in to like video, comment and subscribe.
