@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import cors from "cors";
 import userRoutes from "./routes/users.js";
 import videoRoutes from "./routes/videos.js";
 import commentRoutes from "./routes/comments.js";
@@ -23,6 +24,13 @@ const connect = () => {
 
 app.use(cookieParser());
 app.use(express.json());
+
+app.use(
+  cors({
+    origin: ["http://localhost:5173"],
+  })
+);
+
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/videos", videoRoutes);
